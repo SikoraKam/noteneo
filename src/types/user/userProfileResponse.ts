@@ -4,7 +4,7 @@ export interface UserProfileResponse {
   first_name: string;
   last_name: string;
   phone?: string;
-  date_joined: Date;
+  date_joined: string;
   address?: string;
   is_subscriber: boolean;
   subscription_to?: any;

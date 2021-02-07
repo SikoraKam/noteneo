@@ -1,3 +1,4 @@
+import { Note } from './note';
 import { NoteResponse } from './noteResponse';
 
 export interface NoteListResponse {

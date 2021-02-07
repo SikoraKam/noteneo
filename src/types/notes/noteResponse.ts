@@ -1,12 +1,6 @@
-import { UserProfileResponse } from '../user/userProfileResponse';
+import { Note } from './note';
 
-export interface NoteResponse {
-  id: number;
-  title: string;
-  content: string;
-  categories: []; //TODO: ZMIENIC NA CATEGORY GDY DOSTEPNE
-  author: UserProfileResponse;
-  likes_count: number;
-  created_at?: Date;
-  updated_at?: Date;
+export interface NoteResponse extends Note {
+  created_at: string;
+  updated_at: string;
 }
