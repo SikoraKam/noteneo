@@ -32,8 +32,8 @@ const Tab = createMaterialBottomTabNavigator<BottomTabNavigationParamList>();
 
 const ROUTE_TO_ICON_MAP: Record<keyof BottomTabNavigationParamList, string> = {
   Auth: 'account',
-  Note: 'bottle-wine',
-  NoteSet: 'account-group',
+  Note: 'note-text',
+  NoteSet: 'notebook-multiple',
   Profile: 'account',
   Wallet: 'wallet',
 };

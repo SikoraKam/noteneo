@@ -24,11 +24,11 @@ export const NoteSetScreenStack: React.FC<NoteSetScreenStackProps> = ({
   return (
     <Stack.Navigator
       initialRouteName="NoteBrowser"
-      screenOptions={theme.primaryHeader}>
+      screenOptions={theme.whiteHeader}>
       <Stack.Screen
         name="NoteBrowser"
         component={NoteBrowserScreen}
-        options={{ title: 'Utwórz notatke' }}
+        options={{ title: 'Noteneo' }}
       />
     </Stack.Navigator>
   );
