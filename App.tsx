@@ -10,7 +10,7 @@ import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 import { AlertProvider } from './src/hooks/useAlert';
 import { AuthProvider } from './src/hooks/useAuth';
 import { AppScreen } from './src/screens/AppScreen';
-import { theme } from './src/theme/theme';
+import { theme } from './src/theme';
 
 setLogger({
   log: console.log,
