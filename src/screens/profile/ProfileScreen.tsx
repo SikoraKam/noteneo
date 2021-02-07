@@ -5,29 +5,34 @@ import { ListPlaceholder } from '../../utils/ListPlaceholder';
 import { ContainerWithAvatar } from '../../components/layout/ContainerWithAvatar';
 import { StyleSheet, View } from 'react-native';
 import { AppText } from '../../components/shared/AppText';
+import { useUserProfileQuery } from '../../hooks/user/useUserProfileQuery';
 
 type ProfileScreenProps = StackScreenProps<
   ProfileScreenStackParamList,
   'Profile'
 >;
 
-const profile = {
-  data: {
-    versioned_avatar: require('../../../assets/noteneo-logo.png'),
-    name: 'Franek',
-    elo: 1000,
-  },
-  isFetching: false,
-};
+// const profile = {
+//   data: {
+//     versioned_avatar: require('../../../assets/noteneo-logo.png'),
+//     name: 'Franek',
+//     elo: 1000,
+//   },
+//   isFetching: false,
+// };
+
+const avatar = require('../../../assets/noteneo-logo.png');
 
 export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
+  const profile = useUserProfileQuery();
+
   return (
-    <ContainerWithAvatar
-      avatar={profile.data.versioned_avatar}
-      isLoading={profile.isFetching}>
+    <ContainerWithAvatar avatar={avatar} isLoading={profile.isFetching}>
       <View style={styles.meta}>
-        <AppText variant="h1">{profile.data?.name}</AppText>
-        <AppText variant="h3">Punkty rankingowe: {profile.data?.elo}</AppText>
+        <AppText variant="h1">{profile.data?.first_name}</AppText>
+        <AppText variant="h3">
+          Konto: {profile.data?.is_subscriber ? 'Premium' : 'Podstawowe'}
+        </AppText>
       </View>
     </ContainerWithAvatar>
   );
