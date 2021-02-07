@@ -8,6 +8,7 @@ import { AppText } from '../../components/shared/AppText';
 import { useUserProfileQuery } from '../../hooks/user/useUserProfileQuery';
 import { useUserNoteListQuery } from '../../hooks/notes/useUserNotesQuery';
 import { NoteResponse } from '../../types/notes/noteResponse';
+import { NoteList } from '../../components/note/noteList';
 
 type ProfileScreenProps = StackScreenProps<
   ProfileScreenStackParamList,
@@ -21,7 +22,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const userNoteList = useUserNoteListQuery({ page: 1 });
   const [isLoading, setLoading] = useState(true);
 
-  const userNoteListList = useMemo(() => {
+  const userNoteListReduced = useMemo(() => {
     const initialLoad =
       (userNoteList.isFetching || userNoteList.isError) &&
       !userNoteList.isFetchingNextPage;
@@ -51,6 +52,18 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
           Konto: {profile.data?.is_subscriber ? 'Premium' : 'Podstawowe'}
         </AppText>
       </View>
+      {!isLoading ? (
+        <NoteList
+          onListEndReached={() => {
+            if (userNoteList.hasNextPage) {
+              userNoteList.fetchNextPage();
+            }
+          }}
+          noteList={userNoteListReduced}
+        />
+      ) : (
+        <ListPlaceholder placeholderCount={5} />
+      )}
     </ContainerWithAvatar>
   );
 };
