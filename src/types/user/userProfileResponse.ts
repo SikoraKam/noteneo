@@ -3,9 +3,9 @@ export interface UserProfileResponse {
   email: string;
   first_name: string;
   last_name: string;
-  phone: string;
+  phone?: string;
   date_joined: Date;
-  address: string;
+  address?: string;
   is_subscriber: boolean;
   subscription_to?: any;
 }
