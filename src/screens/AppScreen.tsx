@@ -20,9 +20,9 @@ export const AppScreen: React.FC = () => {
     Inter_500Medium,
   });
 
-  // if (isLoading || !fontsLoaded) {
-  //     return <AppLoading />;
-  // }
+  if (isLoading || !fontsLoaded) {
+    return <AppLoading />;
+  }
   //
   // if (isAuthenticated) {
   //     return <AppScreenStack />;
