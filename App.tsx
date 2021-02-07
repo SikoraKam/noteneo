@@ -1,21 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
+import {
+  DefaultTheme as NavigationDefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native';
+import merge from 'deepmerge';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
+import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import { AlertProvider } from './src/hooks/useAlert';
+import { AuthProvider } from './src/hooks/useAuth';
+import { AppScreen } from './src/screens/AppScreen';
+import { theme } from './src/theme';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+setLogger({
+  log: console.log,
+  warn: console.warn,
+  error: console.warn,
 });
+
+const CombinedDefaultTheme = merge(NavigationDefaultTheme, theme);
+const queryClient = new QueryClient();
+
+const App: React.FC = () => {
+  return (
+    <AuthProvider>
+      <AlertProvider>
+        <QueryClientProvider client={queryClient}>
+          <PaperProvider theme={CombinedDefaultTheme}>
+            <NavigationContainer theme={CombinedDefaultTheme}>
+              <AppScreen />
+            </NavigationContainer>
+          </PaperProvider>
+        </QueryClientProvider>
+      </AlertProvider>
+    </AuthProvider>
+  );
+};
+
+export default App;
