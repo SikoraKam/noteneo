@@ -33,7 +33,7 @@ const useProvideAuth = () => {
   };
 
   const login = async (email: string, password: string) => {
-    const response = await axios.post('auth/signin', {
+    const response = await axios.post('user/token/', {
       email,
       password,
     });
