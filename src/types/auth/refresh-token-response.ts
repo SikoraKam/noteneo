@@ -1,0 +1,3 @@
+interface RefreshTokenResponse {
+  access: string;
+}

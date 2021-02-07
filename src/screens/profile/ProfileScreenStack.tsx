@@ -2,13 +2,13 @@ import { MaterialBottomTabScreenProps } from '@react-navigation/material-bottom-
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { useTheme } from 'react-native-paper';
-import { Text } from 'react-native';
 
 import { BottomTabNavigationParamList } from '../AppScreenStack';
 import { ProfileScreen } from './ProfileScreen';
 import { HeaderAppButton } from '../../components/shared/HeaderAppButton';
 import { ProfileEditRouteParameters } from '../../types/ProfileEditRouteParameters';
 import { ProfileEditScreen } from './ProfileEditScreen';
+import { useAuth } from '../../hooks/useAuth';
 
 export type ProfileScreenStackParamList = {
   Profile: undefined;
@@ -26,11 +26,10 @@ export const ProfileScreenStack: React.FC<ProfileScreenStackProps> = ({
   navigation,
 }) => {
   const theme = useTheme();
-  // const { logout } = useAuth();
+  const { logout } = useAuth();
 
   const onLogout = async () => {
-    // await logout();
-    console.log('WYLOGUJ');
+    await logout();
   };
 
   return (
