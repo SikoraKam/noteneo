@@ -17,9 +17,10 @@ import {
 } from './profile/ProfileScreenStack';
 import { AuthScreenStackParamList } from './auth/AuthScreenStack';
 import { WalletScreenStack } from './wallet/WalletScreenStack';
-
-// import { useUserProfileQuery } from '../hooks/user/useUserProfileQuery';
-// import { AuthScreenStackParamList } from './auth/AuthScreenStack';
+import {
+  CategoriesScreenStack,
+  CategoriesScreenStackParamList,
+} from './categories/CategoriesScreenStack';
 
 export type BottomTabNavigationParamList = {
   Auth: NavigatorScreenParams<AuthScreenStackParamList>;
@@ -27,6 +28,7 @@ export type BottomTabNavigationParamList = {
   NoteSet: NavigatorScreenParams<NoteSetScreenStackParamList>;
   Profile: NavigatorScreenParams<ProfileScreenStackParamList>;
   Wallet: undefined;
+  Categories: NavigatorScreenParams<CategoriesScreenStackParamList>;
 };
 const Tab = createMaterialBottomTabNavigator<BottomTabNavigationParamList>();
 
@@ -36,6 +38,7 @@ const ROUTE_TO_ICON_MAP: Record<keyof BottomTabNavigationParamList, string> = {
   NoteSet: 'notebook-multiple',
   Profile: 'account',
   Wallet: 'wallet',
+  Categories: 'view-list',
 };
 
 export const AppScreenStack: React.FC = () => {
@@ -66,6 +69,11 @@ export const AppScreenStack: React.FC = () => {
         name="Note"
         component={NoteScreenStack}
         options={{ tabBarLabel: 'Nowa' }}
+      />
+      <Tab.Screen
+        name="Categories"
+        component={CategoriesScreenStack}
+        options={{ tabBarLabel: 'Kategorie' }}
       />
       <Tab.Screen
         name="NoteSet"

@@ -45,10 +45,6 @@ export const NoteBrowserScreen: React.FC<NoteBrowserScreenProps> = ({
     noteList.data,
   ]);
 
-  const onCategoryPress = () => {
-    console.log('HEH');
-  };
-
   return (
     <Container>
       <View style={styles.noteList}>
