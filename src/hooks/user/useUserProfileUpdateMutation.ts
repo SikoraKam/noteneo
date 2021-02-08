@@ -11,7 +11,7 @@ export const useUserProfileUpdateMutation = () => {
 
   return useMutation(
     (newProfileSettings: UserProfilePayload) =>
-      axios.patch('user/settings', {
+      axios.patch('user/profile/', {
         email: newProfileSettings.email,
         first_name: newProfileSettings.first_name,
         last_name: newProfileSettings.last_name,

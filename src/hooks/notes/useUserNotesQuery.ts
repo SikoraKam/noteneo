@@ -13,7 +13,7 @@ export const useUserNoteListQuery = ({ page = 1 }) => {
     QUERY_USER_NOTES_KEY,
     async ({ pageParam = page }) => {
       const response = await axios.get(
-        `user/my-notes/?page=${pageParam}&page_size=${PAGE_SIZE}`
+        `notes/my-notes/?page=${pageParam}&page_size=${PAGE_SIZE}`
       );
 
       return response.data;

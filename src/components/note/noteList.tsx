@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { FlatList, ListRenderItemInfo, StyleSheet } from 'react-native';
+import { Text, FlatList, ListRenderItemInfo, StyleSheet } from 'react-native';
 import { List } from 'react-native-paper';
 import { formatDate } from '../../utils/formatBackendTime';
 import { NoteResponse } from '../../types/notes/noteResponse';
+import { AppText } from '../shared/AppText';
 
 interface NoteListProps {
   noteList: NoteResponse[];
@@ -14,10 +15,15 @@ export const NoteList: React.FC<NoteListProps> = (props) => {
     <List.Item
       accessibilityTraits=""
       accessibilityComponentType
-      title={formatDate(item.updated_at)}
+      title={item.title}
       titleStyle={styles.elementName}
       description={item.categories.map((category) => category)}
       left={(props) => <List.Icon {...props} icon="note-outline" />}
+      right={(props) => (
+        <AppText style={{ fontWeight: 'bold' }}>
+          {formatDate(item.updated_at)}
+        </AppText>
+      )}
     />
   );
   return (

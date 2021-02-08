@@ -8,7 +8,7 @@ export const useUserProfileQuery = () => {
   const axios = useAxios();
 
   return useQuery<UserProfileResponse>(QUERY_USER_PROFILE_KEY, async () => {
-    const response = await axios.get<UserProfileResponse>('user');
+    const response = await axios.get<UserProfileResponse>('user/profile/');
     return response.data;
   });
 };
