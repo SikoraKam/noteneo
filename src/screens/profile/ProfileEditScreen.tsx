@@ -17,6 +17,7 @@ import { AvatarSelectButton } from '../../components/shared/AvatarSelectButton';
 import { setResponseErrors } from '../../utils/setResponseErrors';
 import { ProfileScreenStackParamList } from './ProfileScreenStack';
 import { useUserProfileUpdateMutation } from '../../hooks/user/useUserProfileUpdateMutation';
+import { useUpdateAvatarMutation } from '../../hooks/user/useUpdateAvatarMutation';
 
 type ProfileEditScreenProps = StackScreenProps<
   ProfileScreenStackParamList,
@@ -42,9 +43,11 @@ export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = ({
   navigation,
   route,
 }) => {
-  const { mutate } = useUserProfileUpdateMutation();
-  const [avatar, setAvatar] = useState<string>(route.params.avatar);
-  // const mutateAvatar = useUpdateAvatarMutation();
+  console.log('=======================>', route.params.image);
+
+  const { mutateAsync } = useUserProfileUpdateMutation();
+  const [avatar, setAvatar] = useState<string>(route.params.image);
+  const mutateAvatar = useUpdateAvatarMutation();
 
   const {
     register,
@@ -70,33 +73,30 @@ export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = ({
     Keyboard.dismiss();
 
     try {
-      await mutate({ email, first_name: firstName, last_name: lastName });
+      await mutateAsync({ email, first_name: firstName, last_name: lastName });
       navigation.push('Profile');
     } catch (error) {
       setResponseErrors(error, setError);
     }
   };
-  //
-  // const changeAvatar = async (avatarUri: string) => {
-  //   setAvatar(avatarUri);
-  //   try {
-  //     await mutateAvatar.mutateAsync(avatarUri);
-  //   } catch (err) {
-  //     setResponseErrors(err, setError);
-  //     alert('Wystąpił błąd przy zmianie avataru');
-  //   }
-  // };
+
+  const changeAvatar = async (avatarUri: string) => {
+    setAvatar(avatarUri);
+    try {
+      await mutateAvatar.mutateAsync(avatarUri);
+    } catch (err) {
+      setResponseErrors(err, setError);
+      alert('Wystąpił błąd przy zmianie avataru');
+    }
+  };
 
   return (
     <ContainerWithAvatar
-      // avatar={{ uri: avatar }}
-      avatar={require('../../../assets/versioned_initial_avatar.png')}
+      avatar={{ uri: avatar }}
       button={
         <AvatarSelectButton
-          //avatarUri={avatar}
           avatarUri={avatar}
-          // onAvatarChange={(avatarUri) => changeAvatar(avatarUri)}
-          onAvatarChange={(avatarUri) => console.log(avatarUri)}
+          onAvatarChange={(avatarUri) => changeAvatar(avatarUri)}
         />
       }>
       <View style={styles.meta}>

@@ -1,3 +1,3 @@
 export interface ProfileEditRouteParameters {
-  avatar: string;
+  image: string;
 }
