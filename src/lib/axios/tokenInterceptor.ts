@@ -1,6 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-
-import { getToken } from './tokenUtils';
+import { getAccessToken } from '../../utils/tokenUtils';
 
 /**
  * Axios request interceptor
@@ -8,7 +7,7 @@ import { getToken } from './tokenUtils';
  * @param config
  */
 export const tokenInterceptor = async (config: AxiosRequestConfig) => {
-  const token = await getToken();
+  const token = await getAccessToken();
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
