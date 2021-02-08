@@ -5,6 +5,7 @@ import { Category } from '../../types/notes/category';
 
 interface CategoryListProps {
   categoryList: Category[];
+  onPressCategory(): void;
 }
 
 export const CategoryList: React.FC<CategoryListProps> = (props) => {
@@ -16,6 +17,8 @@ export const CategoryList: React.FC<CategoryListProps> = (props) => {
       accessibilityComponentType
       title={item.name}
       titleStyle={styles.elementName}
+      style={styles.itemStyle}
+      onPress={props.onPressCategory}
     />
   );
 
@@ -49,11 +52,17 @@ const styles = StyleSheet.create({
   },
   elementName: {
     fontWeight: 'bold',
+    paddingTop: 10,
+    fontSize: 20,
   },
   rightIndexStyle: {
     fontWeight: 'bold',
     textAlign: 'justify',
     marginRight: 12,
     paddingTop: 6,
+  },
+  itemStyle: {
+    height: 70,
+    marginLeft: 15,
   },
 });
