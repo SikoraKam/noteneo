@@ -27,14 +27,16 @@ type RegisterScreenProps = StackScreenProps<
 >;
 
 type RegisterFormData = {
-  name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
   passwordConfirm: string;
 };
 
 const RegisterSchema = yup.object().shape({
-  name: yup.string().required('Nick jest wymagany'),
+  first_name: yup.string().required('Imie jest wymagane'),
+  last_name: yup.string().required('Nazwisko jest wymagane'),
   email: yup
     .string()
     .email('Podaj poprawny adres email')
@@ -66,18 +68,24 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({
   });
 
   useEffect(() => {
-    register('name');
+    register('first_name');
+    register('last_name');
     register('email');
     register('password');
     register('passwordConfirm');
   }, [register]);
 
-  const onRegister = async ({ name, email, password }: RegisterFormData) => {
+  const onRegister = async ({
+    first_name,
+    last_name,
+    email,
+    password,
+  }: RegisterFormData) => {
     Keyboard.dismiss();
     setPending(true);
 
     try {
-      await registerUser(name, email, password);
+      await registerUser(first_name, last_name, email, password);
       setSuccessModalOpen(true);
     } catch (error) {
       setResponseErrors(error, setError);
@@ -97,12 +105,26 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({
             label="Nick"
             mode="outlined"
             autoCompleteType="username"
-            error={!!errors.name}
-            onChangeText={(value) => setValue('name', value)}
+            error={!!errors.first_name}
+            onChangeText={(value) => setValue('first_name', value)}
           />
-          {!!errors.name && (
-            <HelperText type="error" visible={!!errors.name}>
-              {errors.name?.message}
+          {!!errors.first_name && (
+            <HelperText type="error" visible={!!errors.first_name}>
+              {errors.first_name?.message}
+            </HelperText>
+          )}
+        </View>
+        <View style={styles.row}>
+          <AppInput
+            label="Nick"
+            mode="outlined"
+            autoCompleteType="username"
+            error={!!errors.last_name}
+            onChangeText={(value) => setValue('last_name', value)}
+          />
+          {!!errors.last_name && (
+            <HelperText type="error" visible={!!errors.last_name}>
+              {errors.last_name?.message}
             </HelperText>
           )}
         </View>
