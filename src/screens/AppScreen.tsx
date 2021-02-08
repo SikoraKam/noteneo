@@ -10,6 +10,7 @@ import React from 'react';
 
 import { useAuth } from '../hooks/useAuth';
 import { AppScreenStack } from './AppScreenStack';
+import { AuthScreenStack } from './auth/AuthScreenStack';
 
 export const AppScreen: React.FC = () => {
   const { isLoading, isAuthenticated } = useAuth();
@@ -23,11 +24,10 @@ export const AppScreen: React.FC = () => {
   if (isLoading || !fontsLoaded) {
     return <AppLoading />;
   }
-  //
-  // if (isAuthenticated) {
-  //     return <AppScreenStack />;
-  // } else {
-  //     return <AuthScreenStack />;
-  // }
-  return <AppScreenStack />;
+
+  if (isAuthenticated) {
+    return <AppScreenStack />;
+  } else {
+    return <AuthScreenStack />;
+  }
 };

@@ -16,6 +16,7 @@ import { AvatarSelectButton } from '../../components/shared/AvatarSelectButton';
 // import { useUpdateAvatarMutation } from '../../hooks/useUpdateAvatarMutation';
 import { setResponseErrors } from '../../utils/setResponseErrors';
 import { ProfileScreenStackParamList } from './ProfileScreenStack';
+import { useUserProfileUpdateMutation } from '../../hooks/user/useUserProfileUpdateMutation';
 
 type ProfileEditScreenProps = StackScreenProps<
   ProfileScreenStackParamList,
@@ -23,30 +24,25 @@ type ProfileEditScreenProps = StackScreenProps<
 >;
 
 type ProfileEditFormData = {
-  name: string;
-  actualPassword: string;
-  newPassword: string;
-  newPasswordConfirm: string;
+  email: string;
+  firstName: string;
+  lastName: string;
 };
 
 const ProfileEditSchema = yup.object().shape({
-  name: yup.string().required('Nick jest wymagany'),
-  actualPassword: yup.string().required('Obecne hasło jest wymagane'),
-  newPassword: yup
+  email: yup
     .string()
-    .min(8, 'Hasło musi składać się z min. 8 znaków')
-    .required('Nowe hasło jest wymagane'),
-  newPasswordConfirm: yup
-    .string()
-    .oneOf([yup.ref('newPassword'), null], 'Hasła muszą być identyczne')
-    .required('Powtórz hasło'),
+    .email('Podaj poprawny adres email')
+    .required('Adres email jest wymagany'),
+  firstName: yup.string().required('Imie jest wymagane'),
+  lastName: yup.string().required('Nazwisko jest wymagane'),
 });
 
 export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = ({
   navigation,
   route,
 }) => {
-  // const { mutate } = useProfileEditMutation();
+  const { mutate } = useUserProfileUpdateMutation();
   const [avatar, setAvatar] = useState<string>(route.params.avatar);
   // const mutateAvatar = useUpdateAvatarMutation();
 
@@ -61,25 +57,24 @@ export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = ({
   });
 
   useEffect(() => {
-    register('name');
-    register('actualPassword');
-    register('newPassword');
-    register('newPasswordConfirm');
+    register('email');
+    register('firstName');
+    register('lastName');
   }, [register]);
 
-  // const onEdit = async ({ name, newPassword }: ProfileEditFormData) => {
-  //   Keyboard.dismiss();
-  //
-  //   try {
-  //     await mutate({ name, password: newPassword });
-  //     navigation.push('Profile');
-  //   } catch (error) {
-  //     setResponseErrors(error, setError);
-  //   }
-  // };
+  const onEdit = async ({
+    email,
+    firstName,
+    lastName,
+  }: ProfileEditFormData) => {
+    Keyboard.dismiss();
 
-  const onEdit = async ({ name, newPassword }: ProfileEditFormData) => {
-    console.log('EDITED');
+    try {
+      await mutate({ email, first_name: firstName, last_name: lastName });
+      navigation.push('Profile');
+    } catch (error) {
+      setResponseErrors(error, setError);
+    }
   };
   //
   // const changeAvatar = async (avatarUri: string) => {
@@ -111,52 +106,37 @@ export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = ({
         <AppInput
           style={styles.row}
           mode="outlined"
-          label="Nazwa użytkownika"
-          error={!!errors.name}
-          onChangeText={(text) => setValue('name', text)}
+          label="Email"
+          error={!!errors.email}
+          onChangeText={(text) => setValue('email', text)}
         />
-        {!!errors.name && (
-          <HelperText type="error" visible={!!errors.name}>
-            {errors.name?.message}
+        {!!errors.email && (
+          <HelperText type="error" visible={!!errors.email}>
+            {errors.email?.message}
           </HelperText>
         )}
         <AppInput
-          secureTextEntry
           style={styles.row}
           mode="outlined"
-          label="Aktualne hasło"
-          error={!!errors.actualPassword}
-          onChangeText={(text) => setValue('actualPassword', text)}
+          label="Imie"
+          error={!!errors.firstName}
+          onChangeText={(text) => setValue('firstName', text)}
         />
-        {!!errors.actualPassword && (
-          <HelperText type="error" visible={!!errors.actualPassword}>
-            {errors.actualPassword?.message}
+        {!!errors.firstName && (
+          <HelperText type="error" visible={!!errors.firstName}>
+            {errors.firstName?.message}
           </HelperText>
         )}
         <AppInput
-          secureTextEntry
           style={styles.row}
           mode="outlined"
-          label="Nowe hasło"
-          error={!!errors.newPassword}
-          onChangeText={(text) => setValue('newPassword', text)}
+          label="Nazwisko"
+          error={!!errors.lastName}
+          onChangeText={(text) => setValue('lastName', text)}
         />
-        {!!errors.newPassword && (
-          <HelperText type="error" visible={!!errors.newPassword}>
-            {errors.newPassword?.message}
-          </HelperText>
-        )}
-        <AppInput
-          secureTextEntry
-          style={styles.row}
-          mode="outlined"
-          label="Powtórz nowe hasło"
-          error={!!errors.newPasswordConfirm}
-          onChangeText={(text) => setValue('newPasswordConfirm', text)}
-        />
-        {!!errors.newPasswordConfirm && (
-          <HelperText type="error" visible={!!errors.newPasswordConfirm}>
-            {errors.newPasswordConfirm?.message}
+        {!!errors.lastName && (
+          <HelperText type="error" visible={!!errors.lastName}>
+            {errors.lastName?.message}
           </HelperText>
         )}
         <View style={styles.action}>
