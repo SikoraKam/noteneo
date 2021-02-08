@@ -2,7 +2,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import React, { useMemo, useState } from 'react';
 import { NoteSetScreenStackParamList } from './NoteSetScreenStack';
 import { useNoteListQuery } from '../../hooks/notes/useNoteListQuery';
-import { NoteList } from '../../components/note/noteList';
+import { NoteList } from '../../components/note/NoteList';
 import { ListPlaceholder } from '../../utils/ListPlaceholder';
 import { NoteResponse } from '../../types/notes/noteResponse';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
