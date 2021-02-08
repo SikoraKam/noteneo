@@ -21,7 +21,7 @@ export const useNoteListQuery = ({ page = 1 }) => {
     {
       keepPreviousData: true,
       getNextPageParam: (lastPage) => {
-        return lastPage.next ? 2 : false; //TODO: zmienic po aktualizacji backendu
+        return lastPage.next ? lastPage.current + 1 : false;
       },
     }
   );

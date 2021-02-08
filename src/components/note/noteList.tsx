@@ -25,7 +25,12 @@ export const NoteList: React.FC<NoteListProps> = (props) => {
       accessibilityComponentType
       title={item.title}
       titleStyle={styles.elementName}
-      description={item.categories.map((category) => category)}
+      description={
+        item.categories.map((category) => category.name) +
+        ' | ' +
+        'Polubienia: ' +
+        item.likes_count
+      }
       left={(props) => <List.Icon {...props} icon="note-outline" />}
       right={(props) => (
         <AppText style={{ color: theme.colors.backdrop }}>
