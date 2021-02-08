@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Text, FlatList, ListRenderItemInfo, StyleSheet } from 'react-native';
+import {
+  Text,
+  FlatList,
+  ListRenderItemInfo,
+  StyleSheet,
+  View,
+} from 'react-native';
 import { List } from 'react-native-paper';
 import { formatDate } from '../../utils/formatBackendTime';
 import { NoteResponse } from '../../types/notes/noteResponse';
@@ -26,6 +32,20 @@ export const NoteList: React.FC<NoteListProps> = (props) => {
       )}
     />
   );
+
+  const renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: '90%',
+          backgroundColor: '#CED0CE',
+          marginLeft: '7%',
+        }}
+      />
+    );
+  };
+
   return (
     <FlatList
       data={props.noteList}
@@ -34,6 +54,7 @@ export const NoteList: React.FC<NoteListProps> = (props) => {
       keyExtractor={(note) => note.id.toString()}
       onEndReached={props.onListEndReached}
       onEndReachedThreshold={0.7}
+      ItemSeparatorComponent={renderSeparator}
     />
   );
 };
