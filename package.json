@@ -38,6 +38,7 @@
     "react-native-paper": "^4.7.1",
     "react-native-skeleton-placeholder": "^3.0.2",
     "react-native-web": "~0.13.12",
+    "react-native-webview": "11.0.0",
     "react-query": "^3.8.2"
   },
   "devDependencies": {

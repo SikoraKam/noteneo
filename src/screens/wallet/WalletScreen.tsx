@@ -18,6 +18,7 @@ import { StyleSheet, View } from 'react-native';
 // import { useUserWalletQuery } from '../../hooks/payments/useUserWalletQuery';
 // import { ListPlaceholder } from '../../utils/ListPlaceholder';
 import { WalletScreenStackParamList } from './WalletScreenStack';
+import { AppButton } from '../../components/shared/AppButton';
 
 type WalletScreenProps = StackScreenProps<WalletScreenStackParamList, 'Wallet'>;
 
@@ -118,7 +119,11 @@ export const WalletScreen: React.FC<WalletScreenProps> = ({ navigation }) => {
   //     </Modal>
   //   </Container>
   // );
-  return null;
+  return (
+    <AppButton onPress={() => navigation.push('PaymentMethod')}>
+      Click me
+    </AppButton>
+  );
 };
 
 const styles = StyleSheet.create({

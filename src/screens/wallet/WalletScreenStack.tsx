@@ -5,8 +5,9 @@ import { useTheme } from 'react-native-paper';
 
 import { HeaderAppButton } from '../../components/shared/HeaderAppButton';
 import { BottomTabNavigationParamList } from '../AppScreenStack';
-import { WalletPaymentMethodScreen } from './WalletPaymentMethodScreen';
+// import { WalletPaymentMethodScreen } from './WalletPaymentMethodScreen';
 import { WalletScreen } from './WalletScreen';
+import ReactNativeExpoPurchaseProduct from './ReactNativeExpoPurchaseProduct';
 
 export type WalletScreenStackParamList = {
   Wallet: undefined;
@@ -45,7 +46,7 @@ export const WalletScreenStack: React.FC<WalletScreenStackProps> = ({
       />
       <Stack.Screen
         name="PaymentMethod"
-        component={WalletPaymentMethodScreen}
+        component={ReactNativeExpoPurchaseProduct}
         options={{
           title: 'Metoda płatności',
         }}
