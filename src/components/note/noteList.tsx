@@ -1,6 +1,12 @@
 import * as React from 'react';
-import { Text, FlatList, ListRenderItemInfo, StyleSheet } from 'react-native';
-import { List } from 'react-native-paper';
+import {
+  Text,
+  FlatList,
+  ListRenderItemInfo,
+  StyleSheet,
+  View,
+} from 'react-native';
+import { List, useTheme } from 'react-native-paper';
 import { formatDate } from '../../utils/formatBackendTime';
 import { NoteResponse } from '../../types/notes/noteResponse';
 import { AppText } from '../shared/AppText';
@@ -11,6 +17,8 @@ interface NoteListProps {
 }
 
 export const NoteList: React.FC<NoteListProps> = (props) => {
+  const theme = useTheme();
+
   const renderItem = ({ item }: ListRenderItemInfo<NoteResponse>) => (
     <List.Item
       accessibilityTraits=""
@@ -20,12 +28,26 @@ export const NoteList: React.FC<NoteListProps> = (props) => {
       description={item.categories.map((category) => category)}
       left={(props) => <List.Icon {...props} icon="note-outline" />}
       right={(props) => (
-        <AppText style={{ fontWeight: 'bold' }}>
+        <AppText style={{ color: theme.colors.backdrop }}>
           {formatDate(item.updated_at)}
         </AppText>
       )}
     />
   );
+
+  const renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: '90%',
+          backgroundColor: '#CED0CE',
+          marginLeft: '7%',
+        }}
+      />
+    );
+  };
+
   return (
     <FlatList
       data={props.noteList}
@@ -34,6 +56,7 @@ export const NoteList: React.FC<NoteListProps> = (props) => {
       keyExtractor={(note) => note.id.toString()}
       onEndReached={props.onListEndReached}
       onEndReachedThreshold={0.7}
+      ItemSeparatorComponent={renderSeparator}
     />
   );
 };
