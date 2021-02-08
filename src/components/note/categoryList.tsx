@@ -5,7 +5,7 @@ import { Category } from '../../types/notes/category';
 
 interface CategoryListProps {
   categoryList: Category[];
-  onPressCategory(): void;
+  onPressCategory(categoryName: string): void;
 }
 
 export const CategoryList: React.FC<CategoryListProps> = (props) => {
@@ -18,7 +18,7 @@ export const CategoryList: React.FC<CategoryListProps> = (props) => {
       title={item.name}
       titleStyle={styles.elementName}
       style={styles.itemStyle}
-      onPress={props.onPressCategory}
+      onPress={() => props.onPressCategory(item.name)}
     />
   );
 

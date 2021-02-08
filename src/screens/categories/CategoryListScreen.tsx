@@ -24,7 +24,9 @@ export const CategoryListScreen: React.FC<CategoryListScreenProps> = ({
       {!categoryList.isLoading && categoryList.data !== undefined ? (
         <CategoryList
           categoryList={categoryList.data}
-          onPressCategory={navigation.push}
+          onPressCategory={(categoryName) =>
+            navigation.push('NotesFromCategory', { category: categoryName })
+          }
         />
       ) : (
         <ListPlaceholder placeholderCount={5} />
