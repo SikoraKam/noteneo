@@ -65,15 +65,6 @@ export const NoteBrowserScreen: React.FC<NoteBrowserScreenProps> = ({
           <ListPlaceholder placeholderCount={5} />
         )}
       </View>
-      <View style={styles.categoryBtn}>
-        <TouchableOpacity onPress={onCategoryPress}>
-          <LinearGradient
-            colors={[theme.colors.primary, theme.colors.secondary]}
-            style={styles.appButtonContainer}>
-            <AppText style={styles.appButtonText}>Kategorie</AppText>
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
     </Container>
   );
 };
@@ -82,25 +73,5 @@ const styles = StyleSheet.create({
   noteList: {
     marginTop: 20,
     marginBottom: 20,
-    height: '80%',
-  },
-  appButtonContainer: {
-    height: 70,
-    elevation: 50,
-    borderWidth: 2,
-    borderColor: theme.colors.placeholder,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-  },
-  appButtonText: {
-    fontSize: 18,
-    color: '#fff',
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    textTransform: 'uppercase',
-  },
-  categoryBtn: {
-    flex: 1,
-    justifyContent: 'flex-end',
   },
 });

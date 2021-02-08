@@ -6,7 +6,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { List } from 'react-native-paper';
+import { List, useTheme } from 'react-native-paper';
 import { formatDate } from '../../utils/formatBackendTime';
 import { NoteResponse } from '../../types/notes/noteResponse';
 import { AppText } from '../shared/AppText';
@@ -17,6 +17,8 @@ interface NoteListProps {
 }
 
 export const NoteList: React.FC<NoteListProps> = (props) => {
+  const theme = useTheme();
+
   const renderItem = ({ item }: ListRenderItemInfo<NoteResponse>) => (
     <List.Item
       accessibilityTraits=""
@@ -26,7 +28,7 @@ export const NoteList: React.FC<NoteListProps> = (props) => {
       description={item.categories.map((category) => category)}
       left={(props) => <List.Icon {...props} icon="note-outline" />}
       right={(props) => (
-        <AppText style={{ fontWeight: 'bold' }}>
+        <AppText style={{ color: theme.colors.backdrop }}>
           {formatDate(item.updated_at)}
         </AppText>
       )}
