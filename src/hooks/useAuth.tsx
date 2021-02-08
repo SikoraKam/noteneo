@@ -38,7 +38,7 @@ const useProvideAuth = () => {
     email: string,
     password: string
   ) => {
-    return axios.post('auth/signup', {
+    return axios.post('user/register/', {
       first_name,
       last_name,
       email,
