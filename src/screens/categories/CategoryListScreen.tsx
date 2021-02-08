@@ -4,9 +4,9 @@ import { useTheme } from 'react-native-paper';
 import { Container } from '../../components/layout/Container';
 import { CategoriesScreenStackParamList } from './CategoriesScreenStack';
 import { useCategoryListQuery } from '../../hooks/notes/useCategoryListQuery';
-import { NoteList } from '../../components/note/noteList';
+import { NoteList } from '../../components/note/NoteList';
 import { ListPlaceholder } from '../../utils/ListPlaceholder';
-import { CategoryList } from '../../components/note/categoryList';
+import { CategoryList } from '../../components/note/CategoryList';
 
 type CategoryListScreenProps = StackScreenProps<
   CategoriesScreenStackParamList,
@@ -29,7 +29,7 @@ export const CategoryListScreen: React.FC<CategoryListScreenProps> = ({
           }
         />
       ) : (
-        <ListPlaceholder placeholderCount={5} />
+        <ListPlaceholder placeholderCount={6} />
       )}
     </Container>
   );

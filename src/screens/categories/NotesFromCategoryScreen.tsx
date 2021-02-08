@@ -4,7 +4,7 @@ import { useTheme } from 'react-native-paper';
 import { Container } from '../../components/layout/Container';
 import { CategoriesScreenStackParamList } from './CategoriesScreenStack';
 import { StyleSheet, View } from 'react-native';
-import { NoteList } from '../../components/note/noteList';
+import { NoteList } from '../../components/note/NoteList';
 import { ListPlaceholder } from '../../utils/ListPlaceholder';
 import { NoteResponse } from '../../types/notes/noteResponse';
 import { useNotesFromCategoryQuery } from '../../hooks/notes/notesFromCategoryQuery';
@@ -51,7 +51,6 @@ export const NotesFromCategoryScreen: React.FC<NotesFromCategoryScreenProps> = (
 
   return (
     <Container>
-      <AppText>{route.params.category}</AppText>
       <View style={styles.noteList}>
         {!isLoading ? (
           <NoteList
@@ -63,7 +62,7 @@ export const NotesFromCategoryScreen: React.FC<NotesFromCategoryScreenProps> = (
             noteList={noteListReduced}
           />
         ) : (
-          <ListPlaceholder placeholderCount={5} />
+          <ListPlaceholder placeholderCount={8} />
         )}
       </View>
     </Container>

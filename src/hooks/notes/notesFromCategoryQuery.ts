@@ -16,7 +16,7 @@ export const useNotesFromCategoryQuery = ({
   const axios = useAxios();
 
   return useInfiniteQuery<NoteListResponse>(
-    QUERY_NOTES_KEY,
+    `${QUERY_NOTES_KEY}/${category}`,
     async ({ pageParam = page }) => {
       const response = await axios.get(
         `notes/?category=${category}&page=${pageParam}&page_size=${PAGE_SIZE}`

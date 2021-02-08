@@ -11,6 +11,25 @@ interface CategoryListProps {
 export const CategoryList: React.FC<CategoryListProps> = (props) => {
   const theme = useTheme();
 
+  const renderIcon = (name: string) => {
+    switch (name) {
+      case 'sport':
+        return 'run-fast';
+      case 'math':
+        return 'code-greater-than-or-equal';
+      case 'it':
+        return 'desktop-mac';
+      case 'programming':
+        return 'code-tags';
+      case 'physics':
+        return 'chart-line';
+      case 'tech':
+        return 'cellphone-iphone';
+      default:
+        return 'note';
+    }
+  };
+
   const renderItem = ({ item }: ListRenderItemInfo<Category>) => (
     <List.Item
       accessibilityTraits=""
@@ -19,6 +38,13 @@ export const CategoryList: React.FC<CategoryListProps> = (props) => {
       titleStyle={styles.elementName}
       style={styles.itemStyle}
       onPress={() => props.onPressCategory(item.name)}
+      left={(props) => (
+        <List.Icon
+          {...props}
+          style={{ paddingTop: 10 }}
+          icon={renderIcon(item.name)}
+        />
+      )}
     />
   );
 

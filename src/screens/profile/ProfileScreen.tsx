@@ -8,7 +8,7 @@ import { AppText } from '../../components/shared/AppText';
 import { useUserProfileQuery } from '../../hooks/user/useUserProfileQuery';
 import { useUserNoteListQuery } from '../../hooks/notes/useUserNotesQuery';
 import { NoteResponse } from '../../types/notes/noteResponse';
-import { NoteList } from '../../components/note/noteList';
+import { NoteList } from '../../components/note/NoteList';
 
 type ProfileScreenProps = StackScreenProps<
   ProfileScreenStackParamList,
