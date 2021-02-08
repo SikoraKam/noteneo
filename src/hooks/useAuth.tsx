@@ -56,10 +56,10 @@ const useProvideAuth = () => {
   };
 
   const logout = async () => {
-    const refreshToken = await getRefreshToken();
-    await axios.post('user/logout/', {
-      refresh_token: refreshToken,
-    });
+    // const refreshToken = await getRefreshToken();
+    // await axios.post('user/logout/', {
+    //   refresh_token: refreshToken,
+    // });
     await Promise.all([deleteAccessToken(), deleteRefreshToken()]);
   };
 

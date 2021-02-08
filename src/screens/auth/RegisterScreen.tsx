@@ -102,7 +102,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({
       <PaddedInputScrollView>
         <View style={styles.row}>
           <AppInput
-            label="Nick"
+            label="Imie"
             mode="outlined"
             autoCompleteType="username"
             error={!!errors.first_name}
@@ -116,7 +116,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({
         </View>
         <View style={styles.row}>
           <AppInput
-            label="Nick"
+            label="Nazwisko"
             mode="outlined"
             autoCompleteType="username"
             error={!!errors.last_name}
