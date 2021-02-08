@@ -15,8 +15,6 @@ type ProfileScreenProps = StackScreenProps<
   'Profile'
 >;
 
-const avatar = require('../../../assets/noteneo-logo.png');
-
 export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const profile = useUserProfileQuery();
   const userNoteList = useUserNoteListQuery({ page: 1 });
@@ -45,7 +43,9 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   ]);
 
   return (
-    <ContainerWithAvatar avatar={avatar} isLoading={profile.isFetching}>
+    <ContainerWithAvatar
+      avatar={{ uri: profile.data?.image }}
+      isLoading={profile.isFetching}>
       <View style={styles.meta}>
         <AppText variant="h1">{profile.data?.first_name}</AppText>
         <AppText variant="h3">

@@ -32,9 +32,15 @@ const useProvideAuth = () => {
   const isAuthenticated = token !== null;
   const axios = useAxios();
 
-  const register = async (nick: string, email: string, password: string) => {
+  const register = async (
+    first_name: string,
+    last_name: string,
+    email: string,
+    password: string
+  ) => {
     return axios.post('auth/signup', {
-      name: nick,
+      first_name,
+      last_name,
       email,
       password,
     });
@@ -50,10 +56,10 @@ const useProvideAuth = () => {
   };
 
   const logout = async () => {
-    const refreshToken = await getRefreshToken();
-    await axios.post('user/logout/', {
-      refresh_token: refreshToken,
-    });
+    // const refreshToken = await getRefreshToken();
+    // await axios.post('user/logout/', {
+    //   refresh_token: refreshToken,
+    // });
     await Promise.all([deleteAccessToken(), deleteRefreshToken()]);
   };
 

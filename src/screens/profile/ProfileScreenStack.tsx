@@ -9,6 +9,7 @@ import { HeaderAppButton } from '../../components/shared/HeaderAppButton';
 import { ProfileEditRouteParameters } from '../../types/ProfileEditRouteParameters';
 import { ProfileEditScreen } from './ProfileEditScreen';
 import { useAuth } from '../../hooks/useAuth';
+import { useUserProfileQuery } from '../../hooks/user/useUserProfileQuery';
 
 export type ProfileScreenStackParamList = {
   Profile: undefined;
@@ -25,6 +26,7 @@ const Stack = createStackNavigator<ProfileScreenStackParamList>();
 export const ProfileScreenStack: React.FC<ProfileScreenStackProps> = ({
   navigation,
 }) => {
+  const userProfile = useUserProfileQuery();
   const theme = useTheme();
   const { logout } = useAuth();
 
@@ -43,8 +45,7 @@ export const ProfileScreenStack: React.FC<ProfileScreenStackProps> = ({
             <HeaderAppButton
               onPress={() =>
                 navigation.push('ProfileEdit', {
-                  // avatar: userProfile.data?.versioned_avatar,
-                  avatar: require('../../../assets/versioned_initial_avatar.png'), //TODO
+                  image: userProfile.data?.image,
                 })
               }>
               Edytuj

@@ -4,4 +4,5 @@ export interface User {
   last_name: string;
   phone?: string;
   address?: string;
+  image?: string;
 }
