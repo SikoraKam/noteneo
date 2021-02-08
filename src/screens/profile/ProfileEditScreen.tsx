@@ -43,8 +43,6 @@ export const ProfileEditScreen: React.FC<ProfileEditScreenProps> = ({
   navigation,
   route,
 }) => {
-  console.log('=======================>', route.params.image);
-
   const { mutateAsync } = useUserProfileUpdateMutation();
   const [avatar, setAvatar] = useState<string>(route.params.image);
   const mutateAvatar = useUpdateAvatarMutation();
