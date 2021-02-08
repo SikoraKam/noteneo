@@ -5,8 +5,12 @@ import { useNoteListQuery } from '../../hooks/notes/useNoteListQuery';
 import { NoteList } from '../../components/note/noteList';
 import { ListPlaceholder } from '../../utils/ListPlaceholder';
 import { NoteResponse } from '../../types/notes/noteResponse';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Container } from '../../components/layout/Container';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useTheme } from 'react-native-paper';
+import { AppText } from '../../components/shared/AppText';
+import { theme } from '../../theme';
 
 type NoteBrowserScreenProps = StackScreenProps<
   NoteSetScreenStackParamList,
@@ -16,6 +20,7 @@ type NoteBrowserScreenProps = StackScreenProps<
 export const NoteBrowserScreen: React.FC<NoteBrowserScreenProps> = ({
   navigation,
 }) => {
+  const theme = useTheme();
   const noteList = useNoteListQuery({ page: 1 });
   const [isLoading, setLoading] = useState(true);
 
@@ -40,6 +45,10 @@ export const NoteBrowserScreen: React.FC<NoteBrowserScreenProps> = ({
     noteList.data,
   ]);
 
+  const onCategoryPress = () => {
+    console.log('HEH');
+  };
+
   return (
     <Container>
       <View style={styles.noteList}>
@@ -56,6 +65,15 @@ export const NoteBrowserScreen: React.FC<NoteBrowserScreenProps> = ({
           <ListPlaceholder placeholderCount={5} />
         )}
       </View>
+      <View style={styles.categoryBtn}>
+        <TouchableOpacity onPress={onCategoryPress}>
+          <LinearGradient
+            colors={[theme.colors.primary, theme.colors.secondary]}
+            style={styles.appButtonContainer}>
+            <AppText style={styles.appButtonText}>Kategorie</AppText>
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
     </Container>
   );
 };
@@ -63,5 +81,26 @@ export const NoteBrowserScreen: React.FC<NoteBrowserScreenProps> = ({
 const styles = StyleSheet.create({
   noteList: {
     marginTop: 20,
+    marginBottom: 20,
+    height: '80%',
+  },
+  appButtonContainer: {
+    height: 70,
+    elevation: 50,
+    borderWidth: 2,
+    borderColor: theme.colors.placeholder,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+  },
+  appButtonText: {
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    textTransform: 'uppercase',
+  },
+  categoryBtn: {
+    flex: 1,
+    justifyContent: 'flex-end',
   },
 });
