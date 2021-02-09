@@ -1,7 +1,7 @@
 import { MaterialBottomTabScreenProps } from '@react-navigation/material-bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { useTheme } from 'react-native-paper';
+import { Button, useTheme } from 'react-native-paper';
 import { BottomTabNavigationParamList } from '../AppScreenStack';
 
 import { NoteCreateScreen } from './NoteCreateScreen';
@@ -23,7 +23,17 @@ export const NoteScreenStack: React.FC<NoteScreenStackProps> = ({
   return (
     <Stack.Navigator
       initialRouteName="NoteCreate"
-      screenOptions={theme.primaryHeader}>
+      screenOptions={{
+        ...theme.primaryHeader,
+        headerRight: () => (
+          <Button
+            mode="text"
+            accessibilityTraits=""
+            accessibilityComponentType="">
+            Zapisz
+          </Button>
+        ),
+      }}>
       <Stack.Screen
         name="NoteCreate"
         component={NoteCreateScreen}
