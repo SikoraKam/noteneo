@@ -8,14 +8,12 @@ import { AppText } from '../../components/shared/AppText';
 import { useUserProfileQuery } from '../../hooks/user/useUserProfileQuery';
 import { useUserNoteListQuery } from '../../hooks/notes/useUserNotesQuery';
 import { NoteResponse } from '../../types/notes/noteResponse';
-import { NoteList } from '../../components/note/noteList';
+import { NoteList } from '../../components/note/NoteList';
 
 type ProfileScreenProps = StackScreenProps<
   ProfileScreenStackParamList,
   'Profile'
 >;
-
-const avatar = require('../../../assets/noteneo-logo.png');
 
 export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const profile = useUserProfileQuery();
@@ -45,7 +43,9 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   ]);
 
   return (
-    <ContainerWithAvatar avatar={avatar} isLoading={profile.isFetching}>
+    <ContainerWithAvatar
+      avatar={{ uri: profile.data?.image }}
+      isLoading={profile.isFetching}>
       <View style={styles.meta}>
         <AppText variant="h1">{profile.data?.first_name}</AppText>
         <AppText variant="h3">

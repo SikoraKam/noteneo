@@ -1,10 +1,11 @@
 import { UserProfileResponse } from '../user/userProfileResponse';
+import { Category } from './category';
 
 export interface Note {
   id: number;
   title: string;
   content: string;
-  categories: []; //TODO: ZMIENIC NA CATEGORY GDY DOSTEPNE
+  categories: Category[];
   author: UserProfileResponse;
   likes_count: number;
 }

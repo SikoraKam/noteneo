@@ -4,9 +4,12 @@ import React from 'react';
 import { useTheme } from 'react-native-paper';
 import { BottomTabNavigationParamList } from '../AppScreenStack';
 import { CategoryListScreen } from './CategoryListScreen';
+import { NotesFromCategoryScreen } from './NotesFromCategoryScreen';
+import { NotesFromCategoryRouteParameters } from '../../types/routeParameters/NotesFromCategoryRouteParameters';
 
 export type CategoriesScreenStackParamList = {
   CategoryList: undefined;
+  NotesFromCategory: NotesFromCategoryRouteParameters;
 };
 
 type CategoriesScreenStackProps = MaterialBottomTabScreenProps<
@@ -29,6 +32,11 @@ export const CategoriesScreenStack: React.FC<CategoriesScreenStackProps> = ({
         name="CategoryList"
         component={CategoryListScreen}
         options={{ title: 'Kategorie' }}
+      />
+      <Stack.Screen
+        name="NotesFromCategory"
+        component={NotesFromCategoryScreen}
+        options={{ title: 'Notatki' }}
       />
     </Stack.Navigator>
   );

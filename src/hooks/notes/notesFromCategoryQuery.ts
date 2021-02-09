@@ -6,14 +6,20 @@ import { NoteListResponse } from '../../types/notes/noteListResponse';
 
 const PAGE_SIZE = 10;
 
-export const useNoteListQuery = ({ page = 1 }) => {
+export const useNotesFromCategoryQuery = ({
+  page = 1,
+  category,
+}: {
+  page: number;
+  category: string;
+}) => {
   const axios = useAxios();
 
   return useInfiniteQuery<NoteListResponse>(
-    QUERY_NOTES_KEY,
+    `${QUERY_NOTES_KEY}/${category}`,
     async ({ pageParam = page }) => {
       const response = await axios.get(
-        `notes/?page=${pageParam}&page_size=${PAGE_SIZE}`
+        `notes/?category=${category}&page=${pageParam}&page_size=${PAGE_SIZE}`
       );
 
       return response.data;
