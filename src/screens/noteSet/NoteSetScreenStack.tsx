@@ -4,9 +4,12 @@ import React from 'react';
 import { useTheme } from 'react-native-paper';
 import { BottomTabNavigationParamList } from '../AppScreenStack';
 import { NoteBrowserScreen } from './NoteBrowserScreen';
+import { NoteViewRouteParams } from '../../types/routeParameters/noteViewRouteParams';
+import { NoteViewScreen } from './NoteViewScreen';
 
 export type NoteSetScreenStackParamList = {
   NoteBrowser: undefined;
+  NoteView: NoteViewRouteParams;
 };
 
 type NoteSetScreenStackProps = MaterialBottomTabScreenProps<
@@ -29,6 +32,11 @@ export const NoteSetScreenStack: React.FC<NoteSetScreenStackProps> = ({
         name="NoteBrowser"
         component={NoteBrowserScreen}
         options={{ title: 'Noteneo' }}
+      />
+      <Stack.Screen
+        name="NoteView"
+        component={NoteViewScreen}
+        options={{ title: 'Notatka' }}
       />
     </Stack.Navigator>
   );

@@ -50,6 +50,7 @@ export const NoteBrowserScreen: React.FC<NoteBrowserScreenProps> = ({
       <View style={styles.noteList}>
         {!isLoading ? (
           <NoteList
+            onItemPressed={(noteId) => navigation.push('NoteView', { noteId })}
             onListEndReached={() => {
               if (noteList.hasNextPage) {
                 noteList.fetchNextPage();
