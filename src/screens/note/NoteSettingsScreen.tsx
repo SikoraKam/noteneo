@@ -50,11 +50,11 @@ export const NoteSettingsScreen: React.FC<NoteSettingsScreenProps> = ({
   };
 
   return (
-    <Container>
+    <Container style={{ margin: 8 }}>
       <AppInput
         style={styles.row}
         mode="outlined"
-        label="Email"
+        label="Tytul"
         error={!!errors.title}
         onChangeText={(text) => setValue('title', text)}
       />
@@ -64,34 +64,22 @@ export const NoteSettingsScreen: React.FC<NoteSettingsScreenProps> = ({
         </HelperText>
       )}
 
-      <RadioButton.Group
-        onValueChange={(newValue) => setCategory(newValue)}
-        value={category}>
-        <View>
-          <AppText>IT</AppText>
-          <RadioButton value="it" />
-        </View>
-        <View>
-          <AppText>Math</AppText>
-          <RadioButton value="math" />
-        </View>
-        <View>
-          <AppText>Physics</AppText>
-          <RadioButton value="physics" />
-        </View>
-        <View>
-          <AppText>Programming</AppText>
-          <RadioButton value="programming" />
-        </View>
-        <View>
-          <AppText>Sport</AppText>
-          <RadioButton value="sport" />
-        </View>
-        <View>
-          <AppText>Tech</AppText>
-          <RadioButton value="tech" />
-        </View>
-      </RadioButton.Group>
+      <View style={styles.radioGroup}>
+        <AppText
+          style={{ fontWeight: 'bold', fontSize: 30, textAlign: 'center' }}>
+          Kategorie
+        </AppText>
+        <RadioButton.Group
+          onValueChange={(newValue) => setCategory(newValue)}
+          value={category}>
+          <RadioButton.Item label="IT" value="it" />
+          <RadioButton.Item label="Math" value="math" />
+          <RadioButton.Item label="Physics" value="physics" />
+          <RadioButton.Item label="Programming" value="programming" />
+          <RadioButton.Item label="Sport" value="sport" />
+          <RadioButton.Item label="Tech" value="tech" />
+        </RadioButton.Group>
+      </View>
 
       <View style={styles.action}>
         <AppButton
@@ -113,4 +101,8 @@ const styles = StyleSheet.create({
   action: {
     marginTop: 16,
   },
+  radioGroup: {
+    margin: 4,
+  },
+  radioBtnRow: {},
 });
