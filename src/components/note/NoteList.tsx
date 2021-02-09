@@ -14,6 +14,7 @@ import { AppText } from '../shared/AppText';
 interface NoteListProps {
   noteList: NoteResponse[];
   onListEndReached(): void;
+  onItemPressed(id: number): void;
 }
 
 export const NoteList: React.FC<NoteListProps> = (props) => {
@@ -21,6 +22,7 @@ export const NoteList: React.FC<NoteListProps> = (props) => {
 
   const renderItem = ({ item }: ListRenderItemInfo<NoteResponse>) => (
     <List.Item
+      onPress={() => props.onItemPressed(item.id)}
       accessibilityTraits=""
       accessibilityComponentType
       title={item.title}
