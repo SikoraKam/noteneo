@@ -13,6 +13,7 @@ type NoteCreateScreenProps = StackScreenProps<
 
 export const NoteCreateScreen: React.FC<NoteCreateScreenProps> = ({
   navigation,
+  route,
 }) => {
   const editorRef = useRef<EditorBehaviour | null>(null);
   const editorCaretaker = useRef(new EditorCaretaker()).current;

@@ -5,8 +5,14 @@ import { Button, useTheme } from 'react-native-paper';
 import { BottomTabNavigationParamList } from '../AppScreenStack';
 
 import { NoteCreateScreen } from './NoteCreateScreen';
+import { HeaderAppButton } from '../../components/shared/HeaderAppButton';
+import { NoteSettingsScreen } from './NoteSettingsScreen';
+import { NoteCreateRouteParams } from '../../types/routeParameters/NoteCreateRouteParams';
 
-export type NoteScreenStackParamList = { NoteCreate: undefined };
+export type NoteScreenStackParamList = {
+  NoteSettings: undefined;
+  NoteCreate: NoteCreateRouteParams;
+};
 
 type NoteScreenStackProps = MaterialBottomTabScreenProps<
   BottomTabNavigationParamList,
@@ -22,18 +28,18 @@ export const NoteScreenStack: React.FC<NoteScreenStackProps> = ({
 
   return (
     <Stack.Navigator
-      initialRouteName="NoteCreate"
+      initialRouteName="NoteSettings"
       screenOptions={{
         ...theme.primaryHeader,
         headerRight: () => (
-          <Button
-            mode="text"
-            accessibilityTraits=""
-            accessibilityComponentType="">
-            Zapisz
-          </Button>
+          <HeaderAppButton mode="text">Zapisz</HeaderAppButton>
         ),
       }}>
+      <Stack.Screen
+        name="NoteSettings"
+        component={NoteSettingsScreen}
+        options={{ title: 'Utwórz notatke' }}
+      />
       <Stack.Screen
         name="NoteCreate"
         component={NoteCreateScreen}
