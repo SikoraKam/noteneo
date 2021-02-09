@@ -5,4 +5,6 @@ export interface UserProfileResponse extends User {
   date_joined: string;
   is_subscriber: boolean;
   subscription_to?: any;
+  monthly_views: number;
+  has_access: boolean;
 }
