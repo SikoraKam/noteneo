@@ -7,10 +7,11 @@ import { HeaderAppButton } from '../../components/shared/HeaderAppButton';
 import { BottomTabNavigationParamList } from '../AppScreenStack';
 import { WalletPaymentMethodScreen } from './WalletPaymentMethodScreen';
 import { WalletScreen } from './WalletScreen';
+import { PaymentMethodRouteParams } from '../../types/routeParameters/PaymentMethodRouteParams';
 
 export type WalletScreenStackParamList = {
   Wallet: undefined;
-  PaymentMethod: undefined;
+  PaymentMethod: PaymentMethodRouteParams;
 };
 
 const Stack = createStackNavigator<WalletScreenStackParamList>();

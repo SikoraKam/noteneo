@@ -5,4 +5,5 @@ export interface User {
   phone?: string;
   address?: string;
   image?: string;
+  client_id: string;
 }

@@ -1,112 +1,41 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-// import { CreditCardInput } from 'react-native-credit-card-input';
-//
-// import { Container } from '../../components/layout/Container';
-// import { PaddedInputScrollView } from '../../components/layout/PaddedInputScrollView';
-// import { AppButton } from '../../components/shared/AppButton';
-// import { AppText } from '../../components/shared/AppText';
-// import { useUpdateUserPaymentMethodMutation } from '../../hooks/payments/useUpdateUserPaymentMethodMutation';
-// import { useUserHasActivePaymentMethodQuery } from '../../hooks/payments/useUserHasActivePaymentMethodQuery';
-// import { Stripe } from '../../lib/stripe';
-// import { CreditCardInputResult } from '../../types/credit-card-input-result';
-// import { CreatePaymentMethodPayload } from '../../types/payments/create-payment-method-payload';
 import { WalletScreenStackParamList } from './WalletScreenStack';
+import StripeCheckoutSca from 'expo-stripe-checkout-sca/index';
+import { useAlert } from '../../hooks/useAlert';
 
 type WalletPaymentMethodScreenProps = StackScreenProps<
   WalletScreenStackParamList,
   'PaymentMethod'
 >;
 
-// const preparePaymentMethodPayload = (
-//   card: CreditCardInputResult
-// ): CreatePaymentMethodPayload => {
-//   const { number, expiry, cvc } = card.values;
-//   const [exp_month, exp_year] = expiry.split('/');
-//
-//   return {
-//     type: 'card',
-//     card: {
-//       number,
-//       cvc,
-//       exp_month,
-//       exp_year,
-//     },
-//   };
-// };
-
 export const WalletPaymentMethodScreen: React.FC<WalletPaymentMethodScreenProps> = ({
   navigation,
+  route,
 }) => {
-  // const [card, setCard] = useState<CreditCardInputResult | null>(null);
-  // const updatePaymentMethod = useUpdateUserPaymentMethodMutation();
-  // const [isPending, setPending] = useState(false);
-  // const hasActivePaymentMethod = useUserHasActivePaymentMethodQuery().data;
-  // const [isUpdatingPaymentMethod, setUpdatingPaymentMethod] = useState(false);
-  //
-  // const onSave = async () => {
-  //   if (!card || !card.valid) {
-  //     alert('Wprowadź prawidłowe dane');
-  //     return;
-  //   }
-  //
-  //   setPending(true);
-  //
-  //   try {
-  //     const response = await Stripe.createPaymentMethod(
-  //       preparePaymentMethodPayload(card)
-  //     );
-  //     const { id } = response.data;
-  //     await updatePaymentMethod.mutateAsync(id);
-  //     navigation.navigate('Wallet');
-  //   } catch (error) {
-  //     alert(
-  //       'Podczas zapisywania metody płatności wystąpił błąd. Spróbuj ponownie lub skontaktuj się z supportem.'
-  //     );
-  //     console.log(error.response);
-  //   } finally {
-  //     setPending(false);
-  //   }
-  // };
-  //
-  // if (hasActivePaymentMethod && !isUpdatingPaymentMethod) {
-  //   return (
-  //     <Container>
-  //       <PaddedInputScrollView>
-  //         <AppText style={styles.info}>
-  //           Do Twojego konta została już podpięta karta płatnicza. Jeżeli chcesz
-  //           ją zmienić skorzystaj z przycisku poniżej
-  //         </AppText>
-  //         <AppButton
-  //           mode="contained"
-  //           onPress={() => setUpdatingPaymentMethod(true)}>
-  //           Zmień metodę płatności
-  //         </AppButton>
-  //       </PaddedInputScrollView>
-  //     </Container>
-  //   );
-  // }
-  //
-  // return (
-  //   <Container>
-  //     <PaddedInputScrollView>
-  //       <View style={styles.cardContainer}>
-  //         <CreditCardInput
-  //           onChange={(data: CreditCardInputResult) => setCard(data)}
-  //         />
-  //       </View>
-  //       <AppButton
-  //         loading={isPending}
-  //         disabled={isPending}
-  //         mode="contained"
-  //         onPress={onSave}>
-  //         Zapisz metodę płatności
-  //       </AppButton>
-  //     </PaddedInputScrollView>
-  //   </Container>
-  // );
-  return null;
+  const { showAlert } = useAlert();
+
+  const log = (e: any) => {
+    const url: string = e.url;
+    // Do your stuff
+    // Check url. It may be the success or cancel url
+    // Here you can set modal as no more visible
+  };
+
+  const onClose = () => {
+    showAlert('Anulowano', 'Anulowano platnosc');
+  };
+
+  return (
+    <StripeCheckoutSca
+      modalVisible
+      onClose={onClose}
+      onNavigationStateChange={(e) => log(e)}
+      publicKey="pk_test_51HZwBnKmDbuO5ZNDPqTeA7t4cmps0xTN5iuSz8lo0MlY0oyqrahf4CHc4AVrwcwjn6wz6ojzQIfNcnr0rMW0FQiZ00rTFMMKou"
+      sessionId={route.params.session}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
