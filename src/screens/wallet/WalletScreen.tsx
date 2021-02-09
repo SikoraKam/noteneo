@@ -5,10 +5,10 @@ import { StyleSheet } from 'react-native';
 import { WalletScreenStackParamList } from './WalletScreenStack';
 import { useUserProfileQuery } from '../../hooks/user/useUserProfileQuery';
 import { AppButton } from '../../components/shared/AppButton';
-import StripeCheckoutSca from 'expo-stripe-checkout-sca/index';
 import { useUserCheckoutSessionQuery } from '../../hooks/user/useUserCheckoutSessionQuery';
 import { useQueryClient } from 'react-query';
 import { QUERY_USER_PROFILE_KEY } from '../../const/query.const';
+import { StripeCheckout } from '../../components/stripe/StripeCheckout';
 
 type WalletScreenProps = StackScreenProps<WalletScreenStackParamList, 'Wallet'>;
 
@@ -35,10 +35,9 @@ export const WalletScreen: React.FC<WalletScreenProps> = ({ navigation }) => {
     <>
       <AppButton onPress={initCheckout}>Subskybuj</AppButton>
 
-      <StripeCheckoutSca
+      <StripeCheckout
         modalVisible={isOpen}
         onClose={onClose}
-        onNavigationStateChange={(e) => null}
         publicKey="pk_test_51HZwBnKmDbuO5ZNDPqTeA7t4cmps0xTN5iuSz8lo0MlY0oyqrahf4CHc4AVrwcwjn6wz6ojzQIfNcnr0rMW0FQiZ00rTFMMKou"
         sessionId={sessionId.data ?? ''}
       />

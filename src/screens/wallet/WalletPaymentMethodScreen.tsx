@@ -2,7 +2,6 @@ import { StackScreenProps } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { WalletScreenStackParamList } from './WalletScreenStack';
-import StripeCheckoutSca from 'expo-stripe-checkout-sca';
 import { useAlert } from '../../hooks/useAlert';
 
 type WalletPaymentMethodScreenProps = StackScreenProps<
@@ -27,15 +26,7 @@ export const WalletPaymentMethodScreen: React.FC<WalletPaymentMethodScreenProps>
     showAlert('Anulowano', 'Anulowano platnosc');
   };
 
-  return (
-    <StripeCheckoutSca
-      modalVisible
-      onClose={onClose}
-      onNavigationStateChange={(e) => log(e)}
-      publicKey="pk_test_51HZwBnKmDbuO5ZNDPqTeA7t4cmps0xTN5iuSz8lo0MlY0oyqrahf4CHc4AVrwcwjn6wz6ojzQIfNcnr0rMW0FQiZ00rTFMMKou"
-      sessionId={route.params.session}
-    />
-  );
+  return null;
 };
 
 const styles = StyleSheet.create({
