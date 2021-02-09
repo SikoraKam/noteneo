@@ -10,10 +10,13 @@ import { ProfileEditRouteParameters } from '../../types/ProfileEditRouteParamete
 import { ProfileEditScreen } from './ProfileEditScreen';
 import { useAuth } from '../../hooks/useAuth';
 import { useUserProfileQuery } from '../../hooks/user/useUserProfileQuery';
+import { NoteViewRouteParams } from '../../types/routeParameters/noteViewRouteParams';
+import { NoteViewScreen } from './NoteViewScreen';
 
 export type ProfileScreenStackParamList = {
   Profile: undefined;
   ProfileEdit: ProfileEditRouteParameters;
+  NoteView: NoteViewRouteParams;
 };
 
 type ProfileScreenStackProps = MaterialBottomTabScreenProps<
@@ -60,6 +63,11 @@ export const ProfileScreenStack: React.FC<ProfileScreenStackProps> = ({
         name="ProfileEdit"
         component={ProfileEditScreen}
         options={{ title: 'Edytuj profil' }}
+      />
+      <Stack.Screen
+        name="NoteView"
+        component={NoteViewScreen}
+        options={{ title: 'Notatka' }}
       />
     </Stack.Navigator>
   );

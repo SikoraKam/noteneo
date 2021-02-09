@@ -54,6 +54,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
       </View>
       {!isLoading ? (
         <NoteList
+          onItemPressed={(noteId) => navigation.push('NoteView', { noteId })}
           onListEndReached={() => {
             if (userNoteList.hasNextPage) {
               userNoteList.fetchNextPage();
