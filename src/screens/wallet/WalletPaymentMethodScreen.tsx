@@ -2,7 +2,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { WalletScreenStackParamList } from './WalletScreenStack';
-import StripeCheckoutSca from 'expo-stripe-checkout-sca/index';
+import StripeCheckoutSca from 'expo-stripe-checkout-sca';
 import { useAlert } from '../../hooks/useAlert';
 
 type WalletPaymentMethodScreenProps = StackScreenProps<
