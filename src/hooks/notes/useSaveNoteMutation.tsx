@@ -11,7 +11,6 @@ export const useSaveNoteMutation = () => {
 
   return useMutation(
     (notePayload: NotePayload) => {
-      console.log(notePayload);
       return axios.post('notes/', {
         title: notePayload.title,
         categories: [{ name: notePayload.category }],
@@ -20,7 +19,6 @@ export const useSaveNoteMutation = () => {
     },
     {
       onSuccess: () => {
-        console.log('SUCCESSS');
         queryCache.invalidateQueries(QUERY_NOTES_KEY);
       },
     }

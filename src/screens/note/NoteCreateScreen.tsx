@@ -27,8 +27,6 @@ export const NoteCreateScreen: React.FC<NoteCreateScreenProps> = ({
     const snapshot = await editorRef.current?.makeSnapshot();
     if (snapshot) {
       const content = snapshot.getState();
-      console.log(content);
-
       await saveNoteMutation.mutateAsync({
         title: route.params.title,
         content,
