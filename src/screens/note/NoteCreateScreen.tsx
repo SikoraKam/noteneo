@@ -26,9 +26,12 @@ export const NoteCreateScreen: React.FC<NoteCreateScreenProps> = ({
   const saveNoteHandler = useCallback(async () => {
     const snapshot = await editorRef.current?.makeSnapshot();
     if (snapshot) {
-      saveNoteMutation.mutate({
+      const content = snapshot.getState();
+      console.log(content);
+
+      await saveNoteMutation.mutateAsync({
         title: route.params.title,
-        content: snapshot.getState(),
+        content,
         category: route.params.category,
       });
     }

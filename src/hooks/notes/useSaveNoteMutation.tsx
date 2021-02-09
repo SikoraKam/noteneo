@@ -10,14 +10,17 @@ export const useSaveNoteMutation = () => {
   const queryCache = useQueryClient();
 
   return useMutation(
-    (notePayload: NotePayload) =>
-      axios.post('notes/', {
+    (notePayload: NotePayload) => {
+      console.log(notePayload);
+      return axios.post('notes/', {
         title: notePayload.title,
-        content: notePayload.content,
         categories: [{ name: notePayload.category }],
-      }),
+        content: notePayload.content,
+      });
+    },
     {
       onSuccess: () => {
+        console.log('SUCCESSS');
         queryCache.invalidateQueries(QUERY_NOTES_KEY);
       },
     }
