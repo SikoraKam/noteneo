@@ -1,10 +1,13 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { NoteScreenStackParamList } from './NoteScreenStack';
 import { Editor } from '../../components/editor/Editor';
 import { EditorToolbar } from '../../components/editor/EditorToolbar';
 import { EditorCaretaker } from '../../components/editor/EditorCaretaker';
 import { EditorBehaviour } from '../../types/editor/editor-behaviour';
+import { EventBus } from '../../utils/eventBus';
+import { NOTE_SAVE_EVENT } from '../../const/events.const';
+import { useSaveNoteMutation } from '../../hooks/notes/useSaveNoteMutation';
 
 type NoteCreateScreenProps = StackScreenProps<
   NoteScreenStackParamList,
@@ -18,6 +21,25 @@ export const NoteCreateScreen: React.FC<NoteCreateScreenProps> = ({
   const editorRef = useRef<EditorBehaviour | null>(null);
   const editorCaretaker = useRef(new EditorCaretaker()).current;
   const [isEditorReady, setEditorReady] = useState(false);
+  const saveNoteMutation = useSaveNoteMutation();
+
+  const saveNoteHandler = useCallback(async () => {
+    const snapshot = await editorRef.current?.makeSnapshot();
+    if (snapshot) {
+      saveNoteMutation.mutate({
+        title: route.params.title,
+        content: snapshot.getState(),
+        category: route.params.category,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = EventBus.on(NOTE_SAVE_EVENT, saveNoteHandler);
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const onEditorChange = async () => {
     if (editorRef.current) {

@@ -8,6 +8,8 @@ import { NoteCreateScreen } from './NoteCreateScreen';
 import { HeaderAppButton } from '../../components/shared/HeaderAppButton';
 import { NoteSettingsScreen } from './NoteSettingsScreen';
 import { NoteCreateRouteParams } from '../../types/routeParameters/NoteCreateRouteParams';
+import { EventBus } from '../../utils/eventBus';
+import { NOTE_SAVE_EVENT } from '../../const/events.const';
 
 export type NoteScreenStackParamList = {
   NoteSettings: undefined;
@@ -31,9 +33,6 @@ export const NoteScreenStack: React.FC<NoteScreenStackProps> = ({
       initialRouteName="NoteSettings"
       screenOptions={{
         ...theme.primaryHeader,
-        headerRight: () => (
-          <HeaderAppButton mode="text">Zapisz</HeaderAppButton>
-        ),
       }}>
       <Stack.Screen
         name="NoteSettings"
@@ -43,7 +42,14 @@ export const NoteScreenStack: React.FC<NoteScreenStackProps> = ({
       <Stack.Screen
         name="NoteCreate"
         component={NoteCreateScreen}
-        options={{ title: 'Utwórz notatke' }}
+        options={{
+          title: 'Utwórz notatke',
+          headerRight: () => (
+            <HeaderAppButton onPress={() => EventBus.emit(NOTE_SAVE_EVENT)}>
+              Zapisz
+            </HeaderAppButton>
+          ),
+        }}
       />
     </Stack.Navigator>
   );

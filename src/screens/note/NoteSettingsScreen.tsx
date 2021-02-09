@@ -12,6 +12,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { AppButton } from '../../components/shared/AppButton';
 import { Container } from '../../components/layout/Container';
 import { NoteCreateScreen } from './NoteCreateScreen';
+import { CategoryPayload } from '../../types/notes/CategoryPayload';
 
 type NoteSettingsScreenProps = StackScreenProps<
   NoteScreenStackParamList,
@@ -29,7 +30,7 @@ const NoteSettingsSchema = yup.object().shape({
 export const NoteSettingsScreen: React.FC<NoteSettingsScreenProps> = ({
   navigation,
 }) => {
-  const [category, setCategory] = React.useState('first');
+  const [category, setCategory] = React.useState<string>('it');
 
   const {
     register,
