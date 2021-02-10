@@ -32,8 +32,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
 
     setLoading(false);
 
-    console.log('USEMEMO');
-
     return userNoteList.data!.pages.reduce((list, page) => {
       return [...list, ...page.results];
     }, [] as NoteResponse[]);

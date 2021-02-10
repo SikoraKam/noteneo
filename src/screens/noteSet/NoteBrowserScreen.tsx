@@ -5,12 +5,9 @@ import { useNoteListQuery } from '../../hooks/notes/useNoteListQuery';
 import { NoteList } from '../../components/note/NoteList';
 import { ListPlaceholder } from '../../utils/ListPlaceholder';
 import { NoteResponse } from '../../types/notes/noteResponse';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Container } from '../../components/layout/Container';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from 'react-native-paper';
-import { AppText } from '../../components/shared/AppText';
-import { theme } from '../../theme';
 
 type NoteBrowserScreenProps = StackScreenProps<
   NoteSetScreenStackParamList,
