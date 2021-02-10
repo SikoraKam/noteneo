@@ -13,18 +13,18 @@ export const NoteView: React.FC<NoteViewProps> = (props) => {
     <WebView
       source={{
         html: `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-<h1 style="text-align: center">${note.data.title}</h1>
-  ${note.data.content}
-</body>
-</html>`,
+            <html lang="en">
+            <head>
+              <meta charset="UTF-8">
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>${note.data.title}</title>
+            </head>
+            <body>
+            <h2 style="text-align: center">${note.data.title}</h2>
+              ${note.data.content}
+            </body>
+            </html>`,
       }}
     />
   ) : null;
