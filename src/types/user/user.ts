@@ -5,5 +5,11 @@ export interface User {
   phone?: string;
   address?: string;
   image?: string;
-  client_id: string;
+  client_id?: string;
+  pk?: number;
+  date_joined?: string;
+  is_subscriber?: boolean;
+  subscription_to?: any;
+  monthly_views?: number;
+  has_access?: boolean;
 }

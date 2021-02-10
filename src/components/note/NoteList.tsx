@@ -30,8 +30,10 @@ export const NoteList: React.FC<NoteListProps> = (props) => {
       description={
         item.categories.map((category) => category.name) +
         ' | ' +
-        'Polubienia: ' +
-        item.likes_count
+        'Autor: ' +
+        item.author.first_name +
+        ' ' +
+        item.author.last_name
       }
       left={(props) => <List.Icon {...props} icon="note-outline" />}
       right={(props) => (
