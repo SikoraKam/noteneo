@@ -6,4 +6,10 @@ export interface User {
   address?: string;
   image?: string;
   client_id?: string;
+  pk?: number;
+  date_joined?: string;
+  is_subscriber?: boolean;
+  subscription_to?: any;
+  monthly_views?: number;
+  has_access?: boolean;
 }
