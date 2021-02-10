@@ -6,7 +6,7 @@ import { NoteView } from '../../components/note/NoteView';
 import { Container } from '../../components/layout/Container';
 import { CategoriesScreenStackParamList } from './CategoriesScreenStack';
 import { useUserProfileQuery } from '../../hooks/user/useUserProfileQuery';
-import { useUserCheckoutSessionQuery } from '../../hooks/user/useUserCheckoutSessionQuery';
+import { useUserCheckoutSessionQuery } from '../../hooks/subscription/useUserCheckoutSessionQuery';
 import { useQueryClient } from 'react-query';
 import { QUERY_USER_PROFILE_KEY } from '../../const/query.const';
 import { Button, Paragraph, Title } from 'react-native-paper';

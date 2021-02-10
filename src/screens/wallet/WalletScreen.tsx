@@ -5,11 +5,12 @@ import { StyleSheet, View } from 'react-native';
 import { WalletScreenStackParamList } from './WalletScreenStack';
 import { useUserProfileQuery } from '../../hooks/user/useUserProfileQuery';
 import { AppButton } from '../../components/shared/AppButton';
-import { useUserCheckoutSessionQuery } from '../../hooks/user/useUserCheckoutSessionQuery';
+import { useUserCheckoutSessionQuery } from '../../hooks/subscription/useUserCheckoutSessionQuery';
 import { useQueryClient } from 'react-query';
 import { QUERY_USER_PROFILE_KEY } from '../../const/query.const';
 import { StripeCheckout } from '../../components/stripe/StripeCheckout';
 import { Button, Paragraph, Title } from 'react-native-paper';
+import { useCancelSubscriptionMutation } from '../../hooks/subscription/useCancelSubscriptionMutation';
 
 type WalletScreenProps = StackScreenProps<WalletScreenStackParamList, 'Wallet'>;
 
@@ -18,6 +19,8 @@ export const WalletScreen: React.FC<WalletScreenProps> = ({ navigation }) => {
   const userProfile = useUserProfileQuery();
   const sessionId = useUserCheckoutSessionQuery();
   const queryClient = useQueryClient();
+  const [isPending, setPending] = useState(false);
+  const { mutateAsync } = useCancelSubscriptionMutation();
 
   const onClose = () => {
     queryClient.invalidateQueries(QUERY_USER_PROFILE_KEY);
@@ -32,9 +35,25 @@ export const WalletScreen: React.FC<WalletScreenProps> = ({ navigation }) => {
     }
   };
 
+  const cancelSubscription = async () => {
+    setPending(true);
+
+    try {
+      await mutateAsync();
+      alert(
+        'Subskrybcja została anulowana. Twoje konto premium wygaśnie po zakończeniu aktualnego okresu rozliczeniowego.'
+      );
+    } catch (error) {
+      alert('Podczas anulowania subskrybcji wystąpił błąd!');
+    } finally {
+      setPending(false);
+    }
+  };
+
   return (
     <>
-      {userProfile?.data?.is_subscriber ? (
+      {userProfile?.data?.is_subscriber &&
+      !userProfile.data?.is_subscription_cancelled ? (
         <View style={styles.info}>
           <Title style={styles.textCenter}>Noteneo Premium</Title>
           <Paragraph style={[styles.textCenter, { marginBottom: 16 }]}>
@@ -42,6 +61,17 @@ export const WalletScreen: React.FC<WalletScreenProps> = ({ navigation }) => {
             posiadaczem jedynego w swoim rodzaju konta premium na serwisie
             Noteneo!
           </Paragraph>
+          <Button
+            uppercase={false}
+            labelStyle={{ letterSpacing: 0 }}
+            mode="contained"
+            accessibilityTraits=""
+            accessibilityComponentType=""
+            disabled={isPending}
+            loading={isPending}
+            onPress={cancelSubscription}>
+            Anuluj subskrybcję
+          </Button>
         </View>
       ) : (
         <View style={styles.info}>
