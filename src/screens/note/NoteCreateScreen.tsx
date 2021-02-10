@@ -1,4 +1,4 @@
-import { StackScreenProps } from '@react-navigation/stack';
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { NoteScreenStackParamList } from './NoteScreenStack';
 import { Editor } from '../../components/editor/Editor';
@@ -8,11 +8,17 @@ import { EditorBehaviour } from '../../types/editor/editor-behaviour';
 import { EventBus } from '../../utils/eventBus';
 import { NOTE_SAVE_EVENT } from '../../const/events.const';
 import { useSaveNoteMutation } from '../../hooks/notes/useSaveNoteMutation';
+import { MaterialBottomTabNavigationProp } from '@react-navigation/material-bottom-tabs';
+import { CompositeNavigationProp, RouteProp } from '@react-navigation/native';
+import { BottomTabNavigationParamList } from '../AppScreenStack';
 
-type NoteCreateScreenProps = StackScreenProps<
-  NoteScreenStackParamList,
-  'NoteCreate'
->;
+type NoteCreateScreenProps = {
+  navigation: CompositeNavigationProp<
+    MaterialBottomTabNavigationProp<BottomTabNavigationParamList, 'Note'>,
+    StackNavigationProp<NoteScreenStackParamList, 'NoteCreate'>
+  >;
+  route: RouteProp<NoteScreenStackParamList, 'NoteCreate'>;
+};
 
 export const NoteCreateScreen: React.FC<NoteCreateScreenProps> = ({
   navigation,
@@ -32,6 +38,7 @@ export const NoteCreateScreen: React.FC<NoteCreateScreenProps> = ({
         content,
         category: route.params.category,
       });
+      navigation.jumpTo('Profile', { screen: 'Profile' });
     }
   }, []);
 

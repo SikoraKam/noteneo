@@ -32,6 +32,8 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
 
     setLoading(false);
 
+    console.log('USEMEMO');
+
     return userNoteList.data!.pages.reduce((list, page) => {
       return [...list, ...page.results];
     }, [] as NoteResponse[]);
@@ -54,6 +56,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
       </View>
       {!isLoading ? (
         <NoteList
+          onItemPressed={(noteId) => navigation.push('NoteView', { noteId })}
           onListEndReached={() => {
             if (userNoteList.hasNextPage) {
               userNoteList.fetchNextPage();

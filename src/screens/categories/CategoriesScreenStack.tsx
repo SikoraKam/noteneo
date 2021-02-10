@@ -6,10 +6,13 @@ import { BottomTabNavigationParamList } from '../AppScreenStack';
 import { CategoryListScreen } from './CategoryListScreen';
 import { NotesFromCategoryScreen } from './NotesFromCategoryScreen';
 import { NotesFromCategoryRouteParameters } from '../../types/routeParameters/NotesFromCategoryRouteParameters';
+import { NoteViewRouteParams } from '../../types/routeParameters/noteViewRouteParams';
+import { NoteViewScreen } from './NoteViewScreen';
 
 export type CategoriesScreenStackParamList = {
   CategoryList: undefined;
   NotesFromCategory: NotesFromCategoryRouteParameters;
+  NoteView: NoteViewRouteParams;
 };
 
 type CategoriesScreenStackProps = MaterialBottomTabScreenProps<
@@ -37,6 +40,11 @@ export const CategoriesScreenStack: React.FC<CategoriesScreenStackProps> = ({
         name="NotesFromCategory"
         component={NotesFromCategoryScreen}
         options={{ title: 'Notatki' }}
+      />
+      <Stack.Screen
+        name="NoteView"
+        component={NoteViewScreen}
+        options={{ title: 'Notatka' }}
       />
     </Stack.Navigator>
   );

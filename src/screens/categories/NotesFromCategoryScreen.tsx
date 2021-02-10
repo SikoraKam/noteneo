@@ -54,6 +54,7 @@ export const NotesFromCategoryScreen: React.FC<NotesFromCategoryScreenProps> = (
       <View style={styles.noteList}>
         {!isLoading ? (
           <NoteList
+            onItemPressed={(noteId) => navigation.push('NoteView', { noteId })}
             onListEndReached={() => {
               if (notesFromCategory.hasNextPage) {
                 notesFromCategory.fetchNextPage();
