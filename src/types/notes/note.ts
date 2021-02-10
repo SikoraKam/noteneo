@@ -7,5 +7,4 @@ export interface Note {
   content: string;
   categories: Category[];
   author: UserProfileResponse;
-  likes_count: number;
 }
