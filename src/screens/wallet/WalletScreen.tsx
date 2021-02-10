@@ -1,6 +1,6 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { WalletScreenStackParamList } from './WalletScreenStack';
 import { useUserProfileQuery } from '../../hooks/user/useUserProfileQuery';
@@ -9,6 +9,7 @@ import { useUserCheckoutSessionQuery } from '../../hooks/user/useUserCheckoutSes
 import { useQueryClient } from 'react-query';
 import { QUERY_USER_PROFILE_KEY } from '../../const/query.const';
 import { StripeCheckout } from '../../components/stripe/StripeCheckout';
+import { Button, Paragraph, Title } from 'react-native-paper';
 
 type WalletScreenProps = StackScreenProps<WalletScreenStackParamList, 'Wallet'>;
 
@@ -33,7 +34,33 @@ export const WalletScreen: React.FC<WalletScreenProps> = ({ navigation }) => {
 
   return (
     <>
-      <AppButton onPress={initCheckout}>Subskybuj</AppButton>
+      {userProfile?.data?.is_subscriber ? (
+        <View style={styles.info}>
+          <Title style={styles.textCenter}>Noteneo Premium</Title>
+          <Paragraph style={[styles.textCenter, { marginBottom: 16 }]}>
+            Całunie rączki Mości Panie! Z radością potwierdzam, że jesteś
+            posiadaczem jedynego w swoim rodzaju konta premium na serwisie
+            Noteneo!
+          </Paragraph>
+        </View>
+      ) : (
+        <View style={styles.info}>
+          <Title style={styles.textCenter}>Noteneo Premium</Title>
+          <Paragraph style={[styles.textCenter, { marginBottom: 16 }]}>
+            Wygląda na to, że nie jesteś jeszcze posiadaczem niesamowitego konta
+            premium... Najwyższa pora to zmienić!
+          </Paragraph>
+          <Button
+            uppercase={false}
+            labelStyle={{ letterSpacing: 0 }}
+            mode="contained"
+            accessibilityTraits=""
+            accessibilityComponentType=""
+            onPress={initCheckout}>
+            Wykup subskrybcje
+          </Button>
+        </View>
+      )}
 
       <StripeCheckout
         modalVisible={isOpen}
@@ -56,5 +83,12 @@ const styles = StyleSheet.create({
   },
   numberSelectorContainer: {
     alignItems: 'center',
+  },
+  textCenter: {
+    textAlign: 'center',
+    letterSpacing: 0,
+  },
+  info: {
+    padding: 16,
   },
 });
