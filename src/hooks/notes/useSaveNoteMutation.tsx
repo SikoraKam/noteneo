@@ -23,7 +23,7 @@ export const useSaveNoteMutation = () => {
     {
       onSuccess: async () => {
         await queryCache.invalidateQueries(QUERY_NOTES_KEY);
-        await queryCache.refetchQueries(QUERY_USER_PROFILE_KEY);
+        await queryCache.invalidateQueries(QUERY_USER_PROFILE_KEY);
       },
     }
   );
