@@ -7,7 +7,7 @@ import { Container } from '../../components/layout/Container';
 import { useQueryClient } from 'react-query';
 import { QUERY_USER_PROFILE_KEY } from '../../const/query.const';
 import { useUserProfileQuery } from '../../hooks/user/useUserProfileQuery';
-import { useUserCheckoutSessionQuery } from '../../hooks/user/useUserCheckoutSessionQuery';
+import { useUserCheckoutSessionQuery } from '../../hooks/subscription/useUserCheckoutSessionQuery';
 import { StripeCheckout } from '../../components/stripe/StripeCheckout';
 import { Button, Paragraph, Title } from 'react-native-paper';
 
