@@ -25,8 +25,8 @@ export const EditorToolbar: React.FC<EditorToolbarProps> = (props) => {
         actions.setUnderline,
         actions.insertLink,
         actions.removeFormat,
-        actions.undo,
-        actions.redo,
+        'customUndo',
+        'customRedo'
       ]}
       iconMap={{
         customUndo: require('../../../assets/editor/undo.png'),
