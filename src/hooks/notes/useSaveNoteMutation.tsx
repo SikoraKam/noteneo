@@ -1,9 +1,6 @@
 import { useMutation, useQueryClient } from 'react-query';
 
-import {
-  QUERY_NOTES_KEY,
-  QUERY_USER_PROFILE_KEY,
-} from '../../const/query.const';
+import { QUERY_NOTES_KEY, QUERY_USER_NOTES_KEY } from '../../const/query.const';
 import { useAxios } from '../useAxios';
 import { NotePayload } from '../../types/notes/notePayload';
 
@@ -23,7 +20,7 @@ export const useSaveNoteMutation = () => {
     {
       onSuccess: async () => {
         await queryCache.invalidateQueries(QUERY_NOTES_KEY);
-        await queryCache.invalidateQueries(QUERY_USER_PROFILE_KEY);
+        await queryCache.invalidateQueries(QUERY_USER_NOTES_KEY);
       },
     }
   );
