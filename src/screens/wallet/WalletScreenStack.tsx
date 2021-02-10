@@ -2,10 +2,7 @@ import { MaterialBottomTabScreenProps } from '@react-navigation/material-bottom-
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { useTheme } from 'react-native-paper';
-
-import { HeaderAppButton } from '../../components/shared/HeaderAppButton';
 import { BottomTabNavigationParamList } from '../AppScreenStack';
-import { WalletPaymentMethodScreen } from './WalletPaymentMethodScreen';
 import { WalletScreen } from './WalletScreen';
 import { PaymentMethodRouteParams } from '../../types/routeParameters/PaymentMethodRouteParams';
 
@@ -35,21 +32,7 @@ export const WalletScreenStack: React.FC<WalletScreenStackProps> = ({
         component={WalletScreen}
         options={({ navigation }) => ({
           title: 'Portfel',
-          headerRight: () => (
-            <HeaderAppButton
-              inverse
-              onPress={() => navigation.navigate('PaymentMethod')}>
-              Karta
-            </HeaderAppButton>
-          ),
         })}
-      />
-      <Stack.Screen
-        name="PaymentMethod"
-        component={WalletPaymentMethodScreen}
-        options={{
-          title: 'Metoda płatności',
-        }}
       />
     </Stack.Navigator>
   );
