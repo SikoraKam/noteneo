@@ -38,13 +38,13 @@ export const NoteCreateScreen: React.FC<NoteCreateScreenProps> = ({
         content,
         category: route.params.category,
       });
+      navigation.jumpTo('Profile', { screen: 'Profile' });
     }
   }, []);
 
   useEffect(() => {
     const unsubscribe = EventBus.on(NOTE_SAVE_EVENT, saveNoteHandler);
     return () => {
-      navigation.jumpTo('Profile', { screen: 'Profile' });
       unsubscribe();
     };
   }, []);
